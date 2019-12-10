@@ -22,6 +22,12 @@
             <PersistentString
                value = "translatedText">
             </PersistentString>
+            <PersistentString
+               value = "points">
+            </PersistentString>
+            <PersistentString
+               value = "block.cornerPoints">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
    </ContextStates>

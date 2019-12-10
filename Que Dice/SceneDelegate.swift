@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
          guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = CameraViewController()
+        window?.rootViewController = createMainTabBarController()
         window?.makeKeyAndVisible()
     }
 
@@ -50,6 +50,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    
+    private func createMainTabBarController() -> UITabBarController {
+        let firstvc = UINavigationController.init(rootViewController: CameraViewController())
+         
+       firstvc.tabBarItem = UITabBarItem(title: "Translate", image: UIImage(systemName: "camera"), tag: 0)
+       let tabVC = UITabBarController()
+       tabVC.setViewControllers([firstvc], animated: false)
+       return tabVC
+       }
 
 
 }

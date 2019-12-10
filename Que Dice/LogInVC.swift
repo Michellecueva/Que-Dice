@@ -45,7 +45,7 @@ class LogInVC: UIViewController {
         let textField = UITextField()
 //        textField.placeholder = "Username"
         textField.borderStyle = .roundedRect
-        textField.backgroundColor = .clear
+        textField.backgroundColor = .lightText
         textField.attributedPlaceholder = NSAttributedString(string: "Username",
         attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         textField.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)

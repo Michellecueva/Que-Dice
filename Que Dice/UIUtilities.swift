@@ -116,6 +116,8 @@ public class UIUtilities {
       return .leftTop
     case .rightMirrored:
       return .rightBottom
+    @unknown default:
+        return .topLeft
     }
   }
 
@@ -132,7 +134,9 @@ public class UIUtilities {
         return .portraitUpsideDown
       case .portrait, .unknown:
         return .portrait
-      }
+      @unknown default:
+        return .portrait
+        }
     }
     guard Thread.isMainThread else {
       var currentOrientation: UIDeviceOrientation = .portrait
