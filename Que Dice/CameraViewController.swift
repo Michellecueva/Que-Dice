@@ -86,13 +86,6 @@ class CameraViewController: UIViewController {
         previewLayer.frame = cameraView.frame
     }
     
-    // MARK: - IBActions
-    
-    //  @IBAction func switchCamera(_ sender: Any) {
-    //    isUsingFrontCamera = !isUsingFrontCamera
-    //    removeDetectionAnnotations()
-    //    setUpCaptureSessionInput()
-    //  }
     
     // MARK: - On-Device AutoML Detections
     
@@ -113,7 +106,7 @@ class CameraViewController: UIViewController {
                 UIUtilities.addShape(
                     withPoints: points,
                     to: self.annotationOverlayView,
-                    color: UIColor.purple
+                    color: UIColor.clear
                 )
                 
                 
@@ -141,14 +134,8 @@ class CameraViewController: UIViewController {
                     UIUtilities.addRectangle(
                         convertedRect,
                         to: self.annotationOverlayView,
-                        color: UIColor.green
+                        color: UIColor.gray
                     )
-                    
-                    
-                    //            let label = UILabel(frame: convertedRect)
-                    //            label.text = element.text
-                    //            label.adjustsFontSizeToFitWidth = true
-                    //            self.annotationOverlayView.addSubview(label)
                     
                     
                     let conditions = ModelDownloadConditions(
@@ -158,32 +145,15 @@ class CameraViewController: UIViewController {
                     self.spanishEnglishTranslator.downloadModelIfNeeded(with: conditions) { error in
                         guard error == nil else { return }
                         
-                        //instead of dumbing everything. make a quue objevt and throttle it. so it only deques on an interval
                         
                         self.spanishEnglishTranslator.translate(line.text) { translatedText, error in
                             guard error == nil, let translatedText = translatedText else { return }
                             
-                            self.myQueue.enqueue(element: translatedText)
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                
-                                let nextTranslatedText = self.myQueue.dequeue()
-                                
-                                if nextTranslatedText == nil {
-                                    return
-                                } else {
-                                    
-                                    let label = UILabel(frame: convertedRect)
-                                    label.text = nextTranslatedText
-                                    label.adjustsFontSizeToFitWidth = true
-                                    
-                                    self.annotationOverlayView.addSubview(label)
-                                }
-                                
-                                
-                            }
-                            
-                            
+                            let label = UILabel(frame: convertedRect)
+                            label.text = translatedText
+                            label.adjustsFontSizeToFitWidth = true
+                            self.annotationOverlayView.addSubview(label)
+//                            }
                             
                         }
                     }
@@ -355,7 +325,7 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         let imageHeight = CGFloat(CVPixelBufferGetHeight(imageBuffer))
         
         recognizeTextOnDevice(in: visionImage, width: imageWidth, height: imageHeight)
-        
+        sleep(2)
     }
 }
 
