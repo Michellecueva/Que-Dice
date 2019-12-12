@@ -5,7 +5,7 @@ import CoreVideo
 import FirebaseMLNLTranslate
 import Firebase
 
-@objc(CameraViewController)
+//@objc(CameraViewController)
 class CameraViewController: UIViewController {
     
     var myQueue = Queue()
@@ -18,8 +18,6 @@ class CameraViewController: UIViewController {
     private lazy var sessionQueue = DispatchQueue(label: Constant.sessionQueueLabel)
     private lazy var vision = Vision.vision()
     private var lastFrame: CMSampleBuffer?
-    var stopTranslating = false
-    
     var spanishEnglishTranslator: Translator!
     let localModels = ModelManager.modelManager().downloadedTranslateModels
     
@@ -40,20 +38,27 @@ class CameraViewController: UIViewController {
         annotationOverlayView.translatesAutoresizingMaskIntoConstraints = false
         return annotationOverlayView
     }()
-    
-    // MARK: - IBOutlets
+ 
     
     lazy var cameraView: UIView = {
         let view = UIView(frame: self.view.frame)
+        view.backgroundColor = .cyan
         return view
+    }()
+    
+    lazy var cameraButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "largecircle.fill.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight:.regular)),  for: .normal)
+        button.addTarget(self, action: #selector(cameraButtonPressed), for: .touchUpInside)
+        return button
     }()
     
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(cameraView)
-        
+        setUpCameraView()
+        setButtonConstraints()
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         setUpPreviewOverlayView()
         setUpAnnotationOverlayView()
@@ -65,27 +70,28 @@ class CameraViewController: UIViewController {
         
         // Download the French model.
         let esModel = TranslateRemoteModel.translateRemoteModel(language: .es)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         startSession()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         stopSession()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         previewLayer.frame = cameraView.frame
     }
     
+     //MARK: Obj-C Methods
+    
+    @objc func cameraButtonPressed() {
+        
+    }
     
     // MARK: - On-Device AutoML Detections
     
@@ -225,6 +231,32 @@ class CameraViewController: UIViewController {
         sessionQueue.async {
             self.captureSession.stopRunning()
         }
+    }
+    
+    private func setUpCameraView() {
+        self.view.addSubview(cameraView)
+        cameraView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cameraView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            cameraView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            cameraView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            cameraView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+    }
+    
+
+    
+    private func setButtonConstraints() {
+        cameraView.addSubview(cameraButton)
+        cameraButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            cameraButton.centerXAnchor.constraint(equalTo: cameraView.centerXAnchor),
+            cameraButton.bottomAnchor.constraint(equalTo: cameraView.bottomAnchor, constant: -50),
+            cameraButton.heightAnchor.constraint(equalToConstant: 50),
+            cameraButton.widthAnchor.constraint(equalToConstant: 50)
+            
+        ])
     }
     
     private func setUpPreviewOverlayView() {

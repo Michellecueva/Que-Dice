@@ -24,7 +24,6 @@ class LogInVC: UIViewController {
         label.addInterlineSpacing(spacingValue: 20)
         
     return label
-        //Rockwell-Bold"
 }()
     
     lazy var backgroundImageView: UIImageView = {
@@ -43,16 +42,9 @@ class LogInVC: UIViewController {
     
     lazy var usernameField: UITextField = {
         let textField = UITextField()
-//        textField.placeholder = "Username"
+        textField.placeholder = "Username"
         textField.borderStyle = .roundedRect
         textField.backgroundColor = .lightText
-        textField.attributedPlaceholder = NSAttributedString(string: "Username",
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        textField.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        textField.leftViewMode = .always
-        let image = UIImage(systemName: "person")
-        userFieldImage.image = image
-        textField.leftView = userFieldImage
         return textField
     }()
     
@@ -63,12 +55,80 @@ class LogInVC: UIViewController {
         textField.backgroundColor = .lightText
         return textField
     }()
+    
+    lazy var loginButton: UIButton = {
+           let button = UIButton(type: .system)
+           button.setTitle("Login", for: .normal)
+           button.setTitleColor(.white, for: .normal)
+           button.titleLabel?.font = UIFont(name: "Arial-Bold", size: 16)
+           button.backgroundColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
+           button.layer.cornerRadius = 5
+           button.addTarget(self, action: #selector(tryLogin), for: .touchUpInside)
+           button.isEnabled = true
+           return button
+       }()
+       
+       lazy var createAccountButton: UIButton = {
+           let button = UIButton(type: .system)
+           let attributedTitle = NSMutableAttributedString(
+               string: "Dont have an account?  ",
+               attributes: [
+                   NSAttributedString.Key.font: UIFont(name: "Verdana", size: 14)!,
+                   NSAttributedString.Key.foregroundColor: UIColor.white
+               ]
+           )
+           
+           attributedTitle.append(NSAttributedString(
+               string: "Sign Up",
+               attributes: [
+                   NSAttributedString.Key.font: UIFont(name: "Verdana", size: 14)!,
+                   NSAttributedString.Key.foregroundColor:  UIColor.blue
+               ]
+           ))
+           
+           button.setAttributedTitle(attributedTitle, for: .normal)
+           button.addTarget(self, action: #selector(showSignUp), for: .touchUpInside)
+           return button
+       }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setSubviews()
         setConstraints()
     }
+    
+    //MARK: Obj-C Methods
+    
+    @objc func showSignUp() {
+        let signUpVC = SignUpVC()
+        self.present(signUpVC, animated: true, completion: nil)
+    }
+    
+    @objc func tryLogin() {
+//
+//           guard let email = emailField.text?.trimmingCharacters(in: .whitespacesAndNewlines), let password = passwordField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+//               showErrorAlert(title: "Error", message: "Please fill out all fields.")
+//               return
+//           }
+//
+//
+//           guard email.isValidEmail else {
+//               showErrorAlert(title: "Error", message: "Please enter a valid email")
+//               return
+//           }
+//
+//           guard password.isValidPassword else {
+//               showErrorAlert(title: "Error", message: "Please enter a valid password. Passwords must have at least 8 characters.")
+//               return
+//           }
+//
+//           FirebaseAuthService.manager.loginUser(email: email, password: password) { [weak self] (result) in
+//               self?.handleLoginResponse(result: result)
+//           }
+           
+       }
+    
+//MARK: UI Setup
     
     private func setSubviews() {
         self.view.addSubview(backgroundImageView)
@@ -84,6 +144,8 @@ class LogInVC: UIViewController {
         setUsernameFieldConstraints()
         setPasswordFieldConstraints()
     }
+    
+    
     
     private func setTitleLabelConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -123,7 +185,6 @@ class LogInVC: UIViewController {
             passwordField.heightAnchor.constraint(equalToConstant: 50)
          ])
     }
-
 
 }
 
