@@ -48,8 +48,9 @@ class CameraViewController: UIViewController {
     
     lazy var cameraButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "largecircle.fill.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight:.regular)),  for: .normal)
+        button.setImage(UIImage(systemName: "largecircle.fill.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight:.regular)),  for: .normal)
         button.addTarget(self, action: #selector(cameraButtonPressed), for: .touchUpInside)
+        button.isEnabled = true
         return button
     }()
     
@@ -90,7 +91,16 @@ class CameraViewController: UIViewController {
      //MARK: Obj-C Methods
     
     @objc func cameraButtonPressed() {
+        let view = annotationOverlayView
+        let renderer = UIGraphicsImageRenderer(size: view.bounds.size)
+        let image = renderer.image { ctx in
+            view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        }
         
+        let DVC = DetailVC()
+        DVC.image = image
+        
+        self.present(DVC, animated: true, completion: nil)
     }
     
     // MARK: - On-Device AutoML Detections
@@ -247,14 +257,14 @@ class CameraViewController: UIViewController {
 
     
     private func setButtonConstraints() {
-        cameraView.addSubview(cameraButton)
+        self.view.addSubview(cameraButton)
         cameraButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             cameraButton.centerXAnchor.constraint(equalTo: cameraView.centerXAnchor),
-            cameraButton.bottomAnchor.constraint(equalTo: cameraView.bottomAnchor, constant: -50),
+            cameraButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
             cameraButton.heightAnchor.constraint(equalToConstant: 50),
-            cameraButton.widthAnchor.constraint(equalToConstant: 50)
+            cameraButton.widthAnchor.constraint(equalToConstant: 50),
             
         ])
     }
@@ -355,10 +365,13 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
         visionImage.metadata = metadata
         let imageWidth = CGFloat(CVPixelBufferGetWidth(imageBuffer))
         let imageHeight = CGFloat(CVPixelBufferGetHeight(imageBuffer))
-        
         recognizeTextOnDevice(in: visionImage, width: imageWidth, height: imageHeight)
         sleep(2)
     }
+    
+    // Upon clicking a button, you can turn the UIView (since you want the translations as well) into a UIImage
+    //  https://stackoverflow.com/questions/30696307/how-to-convert-a-uiview-to-an-image
+    //  https://www.hackingwithswift.com/example-code/media/how-to-render-a-uiview-to-a-uiimage
 }
 
 // MARK: - Constants
