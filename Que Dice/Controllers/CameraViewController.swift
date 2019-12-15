@@ -15,12 +15,9 @@ class CameraViewController: UIViewController {
     private lazy var sessionQueue = DispatchQueue(label: Constant.sessionQueueLabel)
     private lazy var vision = Vision.vision()
     private var lastFrame: CMSampleBuffer?
-    var stopTranslating = false
     
     var spanishEnglishTranslator: Translator!
     let localModels = ModelManager.modelManager().downloadedTranslateModels
-    
-    
     
     private lazy var previewOverlayView: UIImageView = {
         
@@ -38,19 +35,24 @@ class CameraViewController: UIViewController {
         return annotationOverlayView
     }()
     
-    // MARK: - IBOutlets
+    lazy var signOutButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "person.crop.circle.badge.xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight:.regular)), for: .normal)
+        button.addTarget(self, action: #selector(signOutButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     
     lazy var cameraView: UIView = {
         let view = UIView(frame: self.view.frame)
         return view
     }()
     
-    // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(cameraView)
-        
+        setSubviewsForVC()
+        setButtonConstraints()
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         setUpPreviewOverlayView()
         setUpAnnotationOverlayView()
@@ -67,20 +69,29 @@ class CameraViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         startSession()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         stopSession()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         previewLayer.frame = cameraView.frame
+    }
+    
+    //MARK: Obj-C Methods
+    
+    @objc func signOutButtonPressed() {
+        FirebaseAuthService.manager.signOutUser()
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            
+            let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window else {return}
+        
+        window.rootViewController = LogInVC()
     }
     
     
@@ -159,15 +170,11 @@ class CameraViewController: UIViewController {
         }
     }
     
-    
-    
     // MARK: - Private
     
     private func setUpCaptureSessionOutput() {
         sessionQueue.async {
             self.captureSession.beginConfiguration()
-            // When performing latency tests to determine ideal capture settings,
-            // run the app in 'release' mode to get accurate performance metrics
             self.captureSession.sessionPreset = AVCaptureSession.Preset.medium
             
             let output = AVCaptureVideoDataOutput()
@@ -224,26 +231,6 @@ class CameraViewController: UIViewController {
         }
     }
     
-    private func setUpPreviewOverlayView() {
-        cameraView.addSubview(previewOverlayView)
-        NSLayoutConstraint.activate([
-            previewOverlayView.centerXAnchor.constraint(equalTo: cameraView.centerXAnchor),
-            previewOverlayView.centerYAnchor.constraint(equalTo: cameraView.centerYAnchor),
-            previewOverlayView.leadingAnchor.constraint(equalTo: cameraView.leadingAnchor),
-            previewOverlayView.trailingAnchor.constraint(equalTo: cameraView.trailingAnchor),
-            
-        ])
-    }
-    
-    private func setUpAnnotationOverlayView() {
-        cameraView.addSubview(annotationOverlayView)
-        NSLayoutConstraint.activate([
-            annotationOverlayView.topAnchor.constraint(equalTo: cameraView.topAnchor),
-            annotationOverlayView.leadingAnchor.constraint(equalTo: cameraView.leadingAnchor),
-            annotationOverlayView.trailingAnchor.constraint(equalTo: cameraView.trailingAnchor),
-            annotationOverlayView.bottomAnchor.constraint(equalTo: cameraView.bottomAnchor),
-        ])
-    }
     
     private func captureDevice(forPosition position: AVCaptureDevice.Position) -> AVCaptureDevice? {
         
@@ -255,7 +242,6 @@ class CameraViewController: UIViewController {
         return discoverySession.devices.first { $0.position == position }
         
     }
-    
     
     private func removeDetectionAnnotations() {
         for annotationView in annotationOverlayView.subviews {
@@ -293,9 +279,47 @@ class CameraViewController: UIViewController {
         }
     }
     
+    //MARK:- UI Setup
+    
+    private func setSubviewsForVC() {
+        self.view.addSubview(cameraView)
+        self.view.addSubview(signOutButton)
+    }
+    
+    private func setButtonConstraints() {
+        signOutButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            signOutButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            signOutButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
+            signOutButton.widthAnchor.constraint(equalToConstant: 50),
+            signOutButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    private func setUpPreviewOverlayView() {
+        cameraView.addSubview(previewOverlayView)
+        NSLayoutConstraint.activate([
+            previewOverlayView.centerXAnchor.constraint(equalTo: cameraView.centerXAnchor),
+            previewOverlayView.centerYAnchor.constraint(equalTo: cameraView.centerYAnchor),
+            previewOverlayView.leadingAnchor.constraint(equalTo: cameraView.leadingAnchor),
+            previewOverlayView.trailingAnchor.constraint(equalTo: cameraView.trailingAnchor),
+            
+        ])
+    }
+    
+    private func setUpAnnotationOverlayView() {
+        cameraView.addSubview(annotationOverlayView)
+        NSLayoutConstraint.activate([
+            annotationOverlayView.topAnchor.constraint(equalTo: cameraView.topAnchor),
+            annotationOverlayView.leadingAnchor.constraint(equalTo: cameraView.leadingAnchor),
+            annotationOverlayView.trailingAnchor.constraint(equalTo: cameraView.trailingAnchor),
+            annotationOverlayView.bottomAnchor.constraint(equalTo: cameraView.bottomAnchor),
+        ])
+    }
+    
 }
 
-// MARK: AVCaptureVideoDataOutputSampleBufferDelegate
+// MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     
