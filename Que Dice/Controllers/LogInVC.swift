@@ -176,7 +176,7 @@ class LogInVC: UIViewController {
                 usernameField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50),
                 usernameField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
                 usernameField.widthAnchor.constraint(equalToConstant: 300),
-                usernameField.heightAnchor.constraint(equalToConstant: 50)
+                usernameField.heightAnchor.constraint(equalToConstant: 40)
             ])
         }
         
@@ -186,7 +186,7 @@ class LogInVC: UIViewController {
                 passwordField.topAnchor.constraint(equalTo: usernameField.bottomAnchor, constant: 30),
                 passwordField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
                 passwordField.widthAnchor.constraint(equalToConstant: 300),
-                passwordField.heightAnchor.constraint(equalToConstant: 50)
+                passwordField.heightAnchor.constraint(equalToConstant: 40)
              ])
         }
     
@@ -196,7 +196,7 @@ class LogInVC: UIViewController {
                loginButton.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 30),
                loginButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
                loginButton.widthAnchor.constraint(equalToConstant: 300),
-               loginButton.heightAnchor.constraint(equalToConstant: 50)
+               loginButton.heightAnchor.constraint(equalToConstant: 40)
            ])
        }
        

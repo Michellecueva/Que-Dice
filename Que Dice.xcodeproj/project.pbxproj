@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281AFA6923A5CDB5006886F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281AFA6823A5CDB5006886F8 /* GoogleService-Info.plist */; };
 		28353AAC236CAD640046EE62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28353AAB236CAD640046EE62 /* AppDelegate.swift */; };
 		28353AAE236CAD640046EE62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28353AAD236CAD640046EE62 /* SceneDelegate.swift */; };
 		28353AB0236CAD640046EE62 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28353AAF236CAD640046EE62 /* LogInVC.swift */; };
@@ -15,8 +16,6 @@
 		28353AC3236CAD680046EE62 /* Que_DiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28353AC2236CAD680046EE62 /* Que_DiceTests.swift */; };
 		28367F0E236FA79F00B1568D /* String Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28367F0D236FA79F00B1568D /* String Extension.swift */; };
 		289543ED2379F877002B8AB9 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289543EC2379F877002B8AB9 /* SignUpVC.swift */; };
-		289DADE0237788E300922F50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 289DADDF237788E300922F50 /* GoogleService-Info.plist */; };
-		289DADEA2377BB9B00922F50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 289DADDF237788E300922F50 /* GoogleService-Info.plist */; };
 		289DADEE2377DB6500922F50 /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289DADED2377DB6500922F50 /* UIUtilities.swift */; };
 		289DAE0923787DBF00922F50 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289DAE0823787DBF00922F50 /* CameraViewController.swift */; };
 		7AC6117FABAA8E6A11C62A52 /* Pods_Que_DiceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2F3A6C084B2B8BBDCEC655 /* Pods_Que_DiceTests.framework */; };
@@ -34,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		281AFA6823A5CDB5006886F8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		28353AA8236CAD640046EE62 /* Que Dice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Que Dice.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28353AAB236CAD640046EE62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28353AAD236CAD640046EE62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +46,6 @@
 		28353AC4236CAD680046EE62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28367F0D236FA79F00B1568D /* String Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String Extension.swift"; sourceTree = "<group>"; };
 		289543EC2379F877002B8AB9 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
-		289DADDF237788E300922F50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		289DADED2377DB6500922F50 /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		289DAE0823787DBF00922F50 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		3A2F3A6C084B2B8BBDCEC655 /* Pods_Que_DiceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Que_DiceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,7 +144,7 @@
 				281AFA6623A5C3AB006886F8 /* Supporting Files */,
 				281AFA6723A5C3EB006886F8 /* Extension */,
 				28353AB9236CAD680046EE62 /* Info.plist */,
-				289DADDF237788E300922F50 /* GoogleService-Info.plist */,
+				281AFA6823A5CDB5006886F8 /* GoogleService-Info.plist */,
 			);
 			path = "Que Dice";
 			sourceTree = "<group>";
@@ -255,7 +254,7 @@
 			files = (
 				28353AB8236CAD680046EE62 /* LaunchScreen.storyboard in Resources */,
 				28353AB5236CAD680046EE62 /* Assets.xcassets in Resources */,
-				289DADE0237788E300922F50 /* GoogleService-Info.plist in Resources */,
+				281AFA6923A5CDB5006886F8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +262,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				289DADEA2377BB9B00922F50 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
