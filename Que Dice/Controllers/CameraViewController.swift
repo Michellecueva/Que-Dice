@@ -8,9 +8,6 @@ import Firebase
 @objc(CameraViewController)
 class CameraViewController: UIViewController {
     
-    var myQueue = Queue()
-    
-    
     private var currentDetector: Detector = .onDeviceText
     private var isUsingFrontCamera = true
     private var previewLayer: AVCaptureVideoPreviewLayer!
@@ -153,7 +150,7 @@ class CameraViewController: UIViewController {
                             label.text = translatedText
                             label.adjustsFontSizeToFitWidth = true
                             self.annotationOverlayView.addSubview(label)
-//                            }
+
                             
                         }
                     }
