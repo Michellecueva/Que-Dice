@@ -5,7 +5,7 @@ import CoreVideo
 import FirebaseMLNLTranslate
 import Firebase
 
-@objc(CameraViewController)
+
 class CameraViewController: UIViewController {
     
     private var currentDetector: Detector = .onDeviceText
@@ -60,8 +60,8 @@ class CameraViewController: UIViewController {
         let options = TranslatorOptions(sourceLanguage: .es, targetLanguage: .en)
         spanishEnglishTranslator = NaturalLanguage.naturalLanguage().translator(options: options)
         
-        // Download the French model.
-        let esModel = TranslateRemoteModel.translateRemoteModel(language: .es)
+        // Download the Spanish model.
+        TranslateRemoteModel.translateRemoteModel(language: .es)
         
     }
     
@@ -150,7 +150,7 @@ class CameraViewController: UIViewController {
                             label.text = translatedText
                             label.adjustsFontSizeToFitWidth = true
                             self.annotationOverlayView.addSubview(label)
-
+                            
                             
                         }
                     }

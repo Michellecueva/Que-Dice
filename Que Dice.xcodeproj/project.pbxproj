@@ -11,6 +11,7 @@
 		281AFA6D23A5E20A006886F8 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281AFA6C23A5E20A006886F8 /* FirestoreService.swift */; };
 		281AFA7A23A5E9C6006886F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281AFA7923A5E9C6006886F8 /* GoogleService-Info.plist */; };
 		281AFA7C23A5E9FC006886F8 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281AFA7B23A5E9FC006886F8 /* AppUser.swift */; };
+		281AFA8023A5EDC5006886F8 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281AFA7F23A5EDC5006886F8 /* TabBarVC.swift */; };
 		28353AAC236CAD640046EE62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28353AAB236CAD640046EE62 /* AppDelegate.swift */; };
 		28353AAE236CAD640046EE62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28353AAD236CAD640046EE62 /* SceneDelegate.swift */; };
 		28353AB0236CAD640046EE62 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28353AAF236CAD640046EE62 /* LogInVC.swift */; };
@@ -40,6 +41,7 @@
 		281AFA6C23A5E20A006886F8 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		281AFA7923A5E9C6006886F8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		281AFA7B23A5E9FC006886F8 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		281AFA7F23A5EDC5006886F8 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		28353AA8236CAD640046EE62 /* Que Dice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Que Dice.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28353AAB236CAD640046EE62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28353AAD236CAD640046EE62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		281AFA6523A5C372006886F8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				281AFA7F23A5EDC5006886F8 /* TabBarVC.swift */,
 				28353AAF236CAD640046EE62 /* LogInVC.swift */,
 				289543EC2379F877002B8AB9 /* SignUpVC.swift */,
 				289DAE0823787DBF00922F50 /* CameraViewController.swift */,
@@ -378,6 +381,7 @@
 				289543ED2379F877002B8AB9 /* SignUpVC.swift in Sources */,
 				281AFA7C23A5E9FC006886F8 /* AppUser.swift in Sources */,
 				28353AAE236CAD640046EE62 /* SceneDelegate.swift in Sources */,
+				281AFA8023A5EDC5006886F8 /* TabBarVC.swift in Sources */,
 				281AFA6D23A5E20A006886F8 /* FirestoreService.swift in Sources */,
 				289DADEE2377DB6500922F50 /* UIUtilities.swift in Sources */,
 			);
